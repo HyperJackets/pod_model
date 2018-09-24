@@ -1,5 +1,6 @@
-#+TITLE: Friction Pad
+#+TITLE: Brakes
 #+AUTHOR: Tarun Nadimpalli & Vishakh Kumar
+
 
 There will be a pneumatic double-acting cylinder with a piston that provides the braking force.
 The brake pad will be added to the bottom of the piston.
