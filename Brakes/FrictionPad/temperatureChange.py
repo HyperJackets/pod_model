@@ -62,7 +62,7 @@ class TemperatureChange(ExplicitComponent):
 
         temperature += change_in_temperature
 
-        outputs["Temperature"] = temperature
+        outputs["NewTemperature"] = temperature
 
 
 #run stand-alone component
@@ -71,11 +71,11 @@ if __name__ == "__main__":
     from openmdao.api import Group, Problem, IndepVarComp
 
     comp = IndepVarComp()
-    comp.add_output('brake_temperature', val=1.0, lower=0, upper=10)
+    comp.add_output('brake_temperature', val=3.0, lower=0, upper=10)
     comp.add_output('mass_brake_pad', val=2.0, lower=1, upper=20)
     comp.add_output('heat_conductive', val=1.0, lower=0, upper=10)
     comp.add_output('heat_convective', val=1.0, lower=1, upper=20)
-    comp.add_output('heat_generated', val=2.0, lower=1, upper=20)
+    comp.add_output('heat_generated', val=100.0, lower=1, upper=20)
 
     prob = Problem()
     prob.model.add_subsystem('indep_var', comp)
@@ -89,4 +89,5 @@ if __name__ == "__main__":
 
 
     prob.setup()
-    prob.run()
+    prob.run_model()
+    print(prob['my_comp.NewTemperature'])
