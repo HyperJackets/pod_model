@@ -1,7 +1,7 @@
 from openmdao.api import ExplicitComponent
 import numpy as np
-class TemperatureChange(ExplicitComponent):
-    """Class to measure the temperature change in the brake pads"""
+class FrictionCoefficient(ExplicitComponent):
+    """Class to find the friction coefficient of the friction pad"""
 
     def initialize(self):
         """Declare options"""
@@ -69,26 +69,26 @@ class TemperatureChange(ExplicitComponent):
 #run stand-alone component
 if __name__ == "__main__":
 
-    from openmdao.api import Group, Problem, IndepVarComp
-
-    comp = IndepVarComp()
-    comp.add_output('brake_temperature', val=3.0, lower=0, upper=10)
-    comp.add_output('mass_brake_pad', val=2.0, lower=1, upper=20)
-    comp.add_output('heat_conductive', val=1.0, lower=0, upper=10)
-    comp.add_output('heat_convective', val=1.0, lower=1, upper=20)
-    comp.add_output('heat_generated', val=100.0, lower=1, upper=20)
-
-    prob = Problem()
-    prob.model.add_subsystem('indep_var', comp)
-    prob.model.add_subsystem('my_comp', TemperatureChange())
-
-    prob.model.connect('indep_var.brake_temperature', 'my_comp.Temperature')
-    prob.model.connect('indep_var.mass_brake_pad',    'my_comp.Mass')
-    prob.model.connect('indep_var.heat_conductive',   'my_comp.HeatConduction')
-    prob.model.connect('indep_var.heat_convective',   'my_comp.HeatConvection')
-    prob.model.connect('indep_var.heat_generated',    'my_comp.HeatGenerated')
-
-
-    prob.setup()
-    prob.run_model()
-    print(prob['my_comp.NewTemperature'])
+#    from openmdao.api import Group, Problem, IndepVarComp
+#
+#    comp = IndepVarComp()
+#    comp.add_output('brake_temperature', val=3.0, lower=0, upper=10)
+#    comp.add_output('mass_brake_pad', val=2.0, lower=1, upper=20)
+#    comp.add_output('heat_conductive', val=1.0, lower=0, upper=10)
+#    comp.add_output('heat_convective', val=1.0, lower=1, upper=20)
+#    comp.add_output('heat_generated', val=100.0, lower=1, upper=20)
+#
+#    prob = Problem()
+#    prob.model.add_subsystem('indep_var', comp)
+#    prob.model.add_subsystem('my_comp', TemperatureChange())
+#
+#    prob.model.connect('indep_var.brake_temperature', 'my_comp.Temperature')
+#    prob.model.connect('indep_var.mass_brake_pad',    'my_comp.Mass')
+#    prob.model.connect('indep_var.heat_conductive',   'my_comp.HeatConduction')
+#    prob.model.connect('indep_var.heat_convective',   'my_comp.HeatConvection')
+#    prob.model.connect('indep_var.heat_generated',    'my_comp.HeatGenerated')
+#
+#
+#    prob.setup()
+#    prob.run_model()
+#    print(prob['my_comp.NewTemperature'])
