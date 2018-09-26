@@ -18,7 +18,7 @@ class HeatConvective(ExplicitComponent):
         self.add_input('TemperatureSurrounding',
                        1.,
                        desc="Temperature of the surrounding")
-        self.add_input('Area',
+        self.add_input('AreaBrakePad',
                        1.,
                        desc="Area subject to convective heat loss")
         self.add_output('HeatRate',
